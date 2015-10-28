@@ -1,5 +1,6 @@
 * downloader.gs
 * To save a given gsheet range in csv format. 
+* To be used with Google Apps Scripts
 * @author: Bahman
 */
 
