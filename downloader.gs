@@ -1,5 +1,5 @@
 * downloader.gs
-* To save a given gsheet range in csv format. 
+* To save all new form inputs in a gsheet in csv format. 
 * To be used with Google Apps Scripts
 * @author: Bahman
 */
@@ -13,7 +13,6 @@ function onOpen() {
 
 function saveAsCSV() {
   // Prompts the user for the file name
-  //var fileName = Browser.inputBox("Save CSV file as (e.g. myCSVFile):");
   var fileName = "file.csv";
   var folderID = ""; //ID of the G-Drive folder where the file should be saved.
   // Convert the range data to CSV format
@@ -22,11 +21,14 @@ function saveAsCSV() {
   DriveApp.getFolderById(folderID).createFile(fileName, csvFile);
 }
 
+/*Converts a range in the Google Sheet to csv format.
+ *Range is taken from the row starting at the currentRow variable till the last row. 
+ *currentRow is a key/value project property.
+*/
 function convertRangeToCsvFile_(csvFileName) {
   // Get the selected range in the spreadsheet
   var sheet = SpreadsheetApp.getActiveSheet();
   var currentRow = parseInt(PropertiesService.getScriptProperties().getProperty('currentRow'));
- // var ws = SpreadsheetApp.getActiveSheet().getRange(2, 2, numRows ,8);
   try {
      if (currentRow <=  sheet.getLastRow()) {
        //getRange and format to plain text so the dates stay in 00/00/0000 format.
