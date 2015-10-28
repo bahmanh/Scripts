@@ -23,7 +23,7 @@ function saveAsCSV() {
 
 /*Converts a range in the Google Sheet to csv format.
  *Range is taken from the row starting at the currentRow variable till the last row. 
- *currentRow is a key/value project property.
+ *currentRow is a key/value project property that keeps track of the last populated row.
 */
 function convertRangeToCsvFile_(csvFileName) {
   // Get the selected range in the spreadsheet
