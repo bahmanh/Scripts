@@ -1,14 +1,18 @@
 #!/bin/bash
 IMPORT="./data/file.csv"
-TEMPLATE="./data/temp.txt"
+TEMPLATE="./data/template.txt"
 
-for i in `cat ${IMPORT}`
-do 
-  VAR_COL1=`echo $i | awk -F, '{print $1}'`
-  VAR_COL2=`echo $i | awk -F, '{print $2}'`
-  VAR_COL3=`echo $i | awk -F, '{print $3}'`
-  cat $TEMPLATE | sed -e s/VAR_COL1/$VAR_COL1/g \
-                      -e s/VAR_COL2/$VAR_COL2/g \
-                      -e s/VAR_COL3/$VAR_COL3/g \
-                >> ./output/output-temp.txt
-done
+#for i in $(cat ${IMPORT})
+cat $IMPORT | while read i;
+do
+#: <<'END'
+  VAR_REDID=$(echo $i | awk -F, '{print $1}')
+  VAR_ISO=$(echo $i | awk -F, '{print $2}')
+  VAR_ACCESS=$(echo $i | awk -F, '{print $3}')
+  cat $TEMPLATE | sed -e "s/VAR_REDID/$VAR_REDID/g" \
+                      -e "s/VAR_ISO/$VAR_ISO/g" \
+                      -e "s/VAR_ACCESS/$VAR_ACCESS/g" \
+                >> ./output/output.txt
+done 
+
+
