@@ -1,7 +1,8 @@
 #!/bin/bash
-IMPORT="./data/file.csv"
+IMPORT="./data/fileData.csv"
 TEMPLATE="./data/template.txt"
 
+dos2unix $IMPORT
 #for i in $(cat ${IMPORT})
 cat $IMPORT | while read i;
 do
@@ -13,6 +14,9 @@ do
                       -e "s/VAR_ISO/$VAR_ISO/g" \
                       -e "s/VAR_ACCESS/$VAR_ACCESS/g" \
                 >> ./output/output.txt
+
 done 
+
+unix2dos ./output/output.txt
 
 
